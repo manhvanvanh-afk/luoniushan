@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>璞域·二期 | 罗牛山 · 海口秀英</title>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",-apple-system,sans-serif;
+  background:#0c0b0a;color:#c8c3b8;line-height:1.8;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(12,11,10,.88);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);border-bottom:1px solid rgba(212,197,169,.08)}
+.nav-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:60px}
+.nav-back{font-size:11px;letter-spacing:2px;color:rgba(200,195,184,.5);transition:color .3s;display:flex;align-items:center;gap:8px}
+.nav-back:hover{color:#d4c5a9}
+.nav-back .arrow{font-size:16px;line-height:1}
+.nav-title{font-size:12px;letter-spacing:3px;color:#d4c5a9}
+.hero-mini{position:relative;height:50vh;min-height:350px;display:flex;align-items:flex-end;padding:0 40px 60px;overflow:hidden;margin-top:60px}
+.hero-mini::before{content:'';position:absolute;inset:0;background-image:inherit;background-size:cover;background-position:center;opacity:.6}
+.hero-mini-overlay{position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(12,11,10,.95) 100%)}
+.hero-mini-content{position:relative;z-index:2;max-width:1280px;width:100%;margin:0 auto}
+.hero-mini-tag{font-size:10px;letter-spacing:4px;color:#d4c5a9;margin-bottom:8px}
+.hero-mini-title{font-size:clamp(28px,3.5vw,42px);font-weight:200;color:#fff;letter-spacing:4px}
+.hero-mini-meta{font-size:13px;color:rgba(200,195,184,.5);margin-top:6px;letter-spacing:2px}
+.section{padding:80px 40px}
+.section-inner{max-width:1280px;margin:0 auto}
+.section-tag{font-size:10px;letter-spacing:5px;color:#d4c5a9;margin-bottom:10px;display:flex;align-items:center;gap:14px}
+.section-tag::before{content:'';width:24px;height:1px;background:rgba(212,197,169,.35)}
+.section-title{font-size:clamp(22px,2.5vw,30px);font-weight:200;color:#fff;letter-spacing:3px;margin-bottom:20px}
+.section-title .accent{color:#d4c5a9;font-weight:300}
+.intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.intro-text{font-size:14px;color:rgba(200,195,184,.55);line-height:2;letter-spacing:1px}
+.intro-text p{margin-bottom:16px}
+.info-table{width:100%;border-collapse:collapse}
+.info-table tr{border-bottom:1px solid rgba(212,197,169,.06)}
+.info-table td{padding:10px 0;font-size:13px}
+.info-table td:first-child{color:rgba(200,195,184,.35);letter-spacing:1px;width:120px}
+.info-table td:last-child{color:#c8c3b8;letter-spacing:1px}
+.highlights-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:32px}
+.highlight-item{background:rgba(26,24,22,.6);padding:20px 24px;border:1px solid rgba(212,197,169,.06);transition:all .3s}
+.highlight-item:hover{border-color:rgba(212,197,169,0.15)}
+.highlight-icon{font-size:20px;margin-bottom:6px}
+.highlight-text{font-size:13px;color:rgba(200,195,184,.6);letter-spacing:1px}
+.building-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
+.building-item{background:rgba(26,24,22,.5);padding:20px;border:1px solid rgba(212,197,169,.06);transition:all .3s}
+.building-item:hover{border-color:rgba(212,197,169,0.15)}
+.building-num{font-size:24px;font-weight:200;color:#d4c5a9;margin-bottom:2px}
+.building-name{font-size:13px;color:#fff;letter-spacing:2px;margin-bottom:4px}
+.building-info{font-size:11px;color:rgba(200,195,184,.4);letter-spacing:1px}
+.gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.gallery-grid .full{grid-column:span 2}
+.gallery-item{position:relative;overflow:hidden;cursor:pointer;background:#1a1816;border-radius:2px}
+.gallery-item img{width:100%;height:280px;object-fit:cover;display:block;opacity:.85;transition:opacity .4s,transform .6s}
+.gallery-item:hover img{opacity:1;transform:scale(1.03)}
+.gallery-item.full img{height:420px}
+.lightbox{display:none;position:fixed;z-index:9999;inset:0;background:rgba(0,0,0,.92);justify-content:center;align-items:center;padding:40px}
+.lightbox.show{display:flex}
+.lightbox img{max-width:95vw;max-height:90vh;object-fit:contain;border-radius:2px;box-shadow:0 20px 80px rgba(0,0,0,.6)}
+.lightbox-close{position:absolute;top:24px;right:32px;color:rgba(255,255,255,.5);font-size:32px;cursor:pointer;transition:color .3s;line-height:1;background:none;border:none}
+.lightbox-close:hover{color:#fff}
+.lightbox-counter{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.3);font-size:12px;letter-spacing:2px}
+.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.3);font-size:36px;cursor:pointer;padding:20px;transition:color .3s;line-height:1}
+.lightbox-nav:hover{color:#fff}
+.lightbox-prev{left:16px}
+.lightbox-next{right:16px}
+.placeholder-box{background:rgba(26,24,22,.5);border:1px dashed rgba(212,197,169,.12);padding:80px 40px;text-align:center;border-radius:2px}
+.placeholder-icon{font-size:40px;margin-bottom:16px;opacity:.3}
+.placeholder-text{font-size:14px;color:rgba(200,195,184,.3);letter-spacing:2px}
+.placeholder-sub{font-size:12px;color:rgba(200,195,184,.2);margin-top:8px;letter-spacing:1px}
+.footer{padding:40px 40px 24px;border-top:1px solid rgba(212,197,169,.05)}
+.footer-inner{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;font-size:11px;color:rgba(200,195,184,.2);letter-spacing:1px}
+@media(max-width:768px){
+  .intro-grid,.highlights-grid,.gallery-grid,.building-grid{grid-template-columns:1fr}
+  .gallery-grid .full{grid-column:span 1}
+  .section{padding:50px 24px}
+  .hero-mini{padding:0 24px 40px}
+  .nav-inner,.lightbox{padding:0 24px}
+  .lightbox-prev{left:4px}
+  .lightbox-next{right:4px}
+}
+@media(max-width:480px){.gallery-item img,.gallery-item.full img{height:200px}}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-back" href="../index.html"><span class="arrow">←</span> 返回主页</a>
+    <span class="nav-title">璞域 · 二期</span>
+    <span></span>
+  </div>
+</nav>
+<section class="hero-mini" style="background-image:url('../效果图_web/118A/效果图/效果图/鸟瞰图/WechatIMG232.jpg')">
+  <div class="hero-mini-overlay"></div>
+  <div class="hero-mini-content">
+    <div class="hero-mini-tag">118A · 丘海大道</div>
+    <div class="hero-mini-title">璞域 · 二期</div>
+    <div class="hero-mini-meta">约100亩秀英城芯稀缺大盘 · 7栋住宅 + 6栋商办 · 景观泳池</div>
+  </div>
+</section>
+<section class="section">
+  <div class="section-inner">
+    <div class="section-tag">PROJECT PROFILE</div>
+    <div class="section-title">项目 <span class="accent">简介</span></div>
+    <div class="intro-grid">
+      <div class="intro-text">
+        <p>璞域·二期位于海口市秀英区核心，丘海大道与金集路交汇处，占地约100亩，以百万方规模、全业态规划致敬海口品质生活新高度。</p>
+        <p>项目以"中轴秩序 · 活力商业 · 阳光社区"为三大规划主题，各建筑沿地块边线围合布局，形成超大中心庭院。景观泳池配置，下楼即度假生活。米白色真石漆主体墙面，深咖色涂料点缀，横向曲线铝板线脚灵动流畅，端庄大气、高贵典雅。</p>
+      </div>
+      <div>
+        <table class="info-table">
+          <tr><td>开发商</td><td>罗牛山股份有限公司</td></tr>
+          <tr><td>设计单位</td><td>四川中泰联合设计股份有限公司</td></tr>
+          <tr><td>项目位置</td><td>海口市秀英区 · 丘海大道西侧</td></tr>
+          <tr><td>占地面积</td><td>66,968.53 ㎡（约100亩）</td></tr>
+          <tr><td>总建面积</td><td>286,154.88 ㎡</td></tr>
+          <tr><td>产品类型</td><td>高端住宅 + 商业办公 + 沿街商业</td></tr>
+          <tr><td>住宅楼</td><td>7 栋（22~24层）</td></tr>
+          <tr><td>商办楼</td><td>6 栋（2~19层）</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="highlights-grid">
+      <div class="highlight-item"><div class="highlight-icon">🏛️</div><div class="highlight-text">约100亩 · 秀英城芯稀缺规模 · 中轴秩序规划</div></div>
+      <div class="highlight-item"><div class="highlight-icon">🏊</div><div class="highlight-text">景观泳池配置 · 度假风生活方式 · 中心庭院围合</div></div>
+      <div class="highlight-item"><div class="highlight-icon">🏢</div><div class="highlight-text">7栋住宅 + 6栋商办 · 多元业态复合社区</div></div>
+      <div class="highlight-item"><div class="highlight-icon">🌿</div><div class="highlight-text">节能率65% · 绿色建筑星 &middot; 100%充电桩预留</div></div>
+    </div>
+    <div class="section-title" style="margin-top:40px;font-size:20px">楼栋 <span class="accent">信息</span></div>
+    <div class="building-grid">
+      <div class="building-item"><div class="building-num">8#</div><div class="building-name">住宅 · 22层</div><div class="building-info">舒适居住 · 户型方正</div></div>
+      <div class="building-item"><div class="building-num">9#</div><div class="building-name">住宅 · 24层</div><div class="building-info">高层住宅 · 视野开阔</div></div>
+      <div class="building-item"><div class="building-num">10#</div><div class="building-name">住宅 · 22层</div><div class="building-info">舒适居住 · 采光通透</div></div>
+      <div class="building-item"><div class="building-num">11#</div><div class="building-name">住宅 · 23层</div><div class="building-info">品质人居 · 中轴景观</div></div>
+      <div class="building-item"><div class="building-num">12#</div><div class="building-name">住宅 · 23层</div><div class="building-info">品质人居 · 中轴景观</div></div>
+      <div class="building-item"><div class="building-num">13#</div><div class="building-name">住宅 · 23层</div><div class="building-info">品质人居 · 中轴景观</div></div>
+      <div class="building-item"><div class="building-num">15#</div><div class="building-name">住宅 · 24层</div><div class="building-info">高层住宅 · 南北通透</div></div>
+    </div>
+  </div>
+</section>
+<section class="section" style="padding-top:0">
+  <div class="section-inner">
+    <div class="section-tag">RENDERINGS GALLERY</div>
+    <div class="section-title">效果图 <span class="accent">展示</span></div>
+    <div class="gallery-grid" id="gallery">
+      <div class="gallery-item full"><img src="../效果图_web/118A/效果图/效果图/鸟瞰图/WechatIMG228.jpg" alt="璞域二期 · 鸟瞰全景" onclick="openLightbox(0)"></div>
+      <div class="gallery-item"><img src="../效果图_web/118A/效果图/效果图/鸟瞰图/WechatIMG230.jpg" alt="璞域二期 · 鸟瞰" onclick="openLightbox(1)"></div>
+      <div class="gallery-item"><img src="../效果图_web/118A/效果图/效果图/鸟瞰图/WechatIMG231.jpg" alt="璞域二期 · 鸟瞰" onclick="openLightbox(2)"></div>
+      <div class="gallery-item"><img src="../效果图_web/118A/效果图/效果图/鸟瞰图/WechatIMG232.jpg" alt="璞域二期 · 鸟瞰" onclick="openLightbox(3)"></div>
+      <div class="gallery-item"><img src="../效果图_web/118A/效果图/效果图/鸟瞰图/WechatIMG236.jpg" alt="璞域二期 · 鸟瞰" onclick="openLightbox(4)"></div>
+      <div class="gallery-item"><img src="../效果图_web/118A/效果图/效果图/南立面/YT-20240932-hyd-lb-ts03副本.jpg" alt="璞域二期 · 南立面" onclick="openLightbox(5)"></div>
+      <div class="gallery-item"><img src="../效果图_web/118A/效果图/效果图/南立面/YT-20240932-lsy-zyq-ts1副本.jpg" alt="璞域二期 · 立面效果" onclick="openLightbox(6)"></div>
+    </div>
+  </div>
+</section>
+<section class="section" style="padding-top:0">
+  <div class="section-inner">
+    <div class="section-tag">FLOOR PLANS</div>
+    <div class="section-title">户型图 <span class="accent">展示</span></div>
+    <div class="placeholder-box">
+      <div class="placeholder-icon">📐</div>
+      <div class="placeholder-text">户型图待补充</div>
+      <div class="placeholder-sub">准备好户型图后，将在此处以大图展示各户型平面与格局</div>
+    </div>
+  </div>
+</section>
+<footer class="footer">
+  <div class="footer-inner"><span>© 2026 罗牛山股份有限公司</span><span>展示参考 · 不作为销售承诺</span></div>
+</footer>
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-nav lightbox-prev" onclick="changeImg(-1)">‹</button>
+  <img id="lightboxImg" src="" alt="">
+  <button class="lightbox-nav lightbox-next" onclick="changeImg(1)">›</button>
+  <div class="lightbox-counter" id="lightboxCounter"></div>
+</div>
+<script>
+var images=[],currentIdx=0;
+document.querySelectorAll('#gallery img').forEach(function(i){images.push(i.src)});
+function openLightbox(i){currentIdx=i;
+  document.getElementById('lightboxImg').src=images[i];
+  document.getElementById('lightboxCounter').textContent=(i+1)+' / '+images.length;
+  document.getElementById('lightbox').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function closeLightbox(e){if(e&&e.target!==e.currentTarget)return;
+  document.getElementById('lightbox').classList.remove('show');
+  document.body.style.overflow='';
+}
+function changeImg(d){currentIdx=(currentIdx+d+images.length)%images.length;openLightbox(currentIdx)}
+document.addEventListener('keydown',function(e){
+  if(!document.getElementById('lightbox').classList.contains('show'))return;
+  if(e.key==='Escape')closeLightbox();
+  if(e.key==='ArrowLeft')changeImg(-1);
+  if(e.key==='ArrowRight')changeImg(1);
+});
+</script>
+</body>
+</html>
